@@ -1,0 +1,478 @@
+{
+  "endpoints": [
+    {
+      "name": "Voice",
+      "methods": [
+        {
+          "MethodName": "Make call",
+          "Synopsis": "Make a voice call back",
+          "HTTPMethod": "GET",
+          "URI": "/voice/call",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "app_id",
+              "Description": "App ID",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "access_token",
+              "Description": "Access Token",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "dest1",
+              "Description": "Phone number of destination 1 ",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "dest2",
+              "Description": "Phone number of destination 2",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "caller_id",
+              "Description": "The caller ID that dest2 will see",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "max_duration",
+              "Description": "The max duration for the call (in sec)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
+        {
+          "MethodName": "Call conference",
+          "Synopsis": "Make a conference call",
+          "HTTPMethod": "GET",
+          "URI": "/voice/conference",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "app_id",
+              "Description": "App ID",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "access_token",
+              "Description": "Access Token",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "dest",
+              "Description": "List of phone numbers to call to, separated by commas",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "room",
+              "Description": "The room name for the conference. If ommited, a new room will be created.",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "caller_id",
+              "Description": "The caller ID that each destination number will see",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
+
+
+        {
+          "MethodName": "Call history",
+          "Synopsis": "Retrieve the history of calls",
+          "HTTPMethod": "GET",
+          "URI": "/voice/get_history",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "app_id",
+              "Description": "App ID",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "access_token",
+              "Description": "Access Token",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "from",
+              "Description": "From this date time (format: YYYY-MM-DD HH:MM:SS)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "to",
+              "Description": "Till this date time (format: YYYY-MM-DD HH:MM:SS)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "page",
+              "Description": "Page number",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
+        {
+          "MethodName": "Query call status",
+          "Synopsis": "Query a call",
+          "HTTPMethod": "GET",
+          "URI": "/voice/query_status",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "app_id",
+              "Description": "App ID",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "access_token",
+              "Description": "Access Token",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "txn_ref",
+              "Description": "Transaction reference for the call",
+              "Type":"string",
+              "Required": "Y"
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "name": "SMS",
+      "methods": [
+        {
+          "MethodName": "Send SMS",
+          "Synopsis": "Send an SMS",
+          "HTTPMethod": "GET",
+          "URI": "/sms/send",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "app_id",
+              "Description": "App ID",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "access_token",
+              "Description": "Access Token",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "dest",
+              "Description": "Phone number to send to",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "sender_name",
+              "Description": "Sender name that recipient will see",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "msg",
+              "Description": "The SMS message",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
+        {
+          "MethodName": "Send bulk SMS",
+          "Synopsis": "Send up to 1000 SMS in a single request",
+          "HTTPMethod": "GET",
+          "URI": "/sms/bulk_send",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "app_id",
+              "Description": "App ID",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "access_token",
+              "Description": "Access Token",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "dest",
+              "Description": "List of phone numbers to send to, separated by comma",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "sender_name",
+              "Description": "Sender name that recipient will see",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "msg",
+              "Description": "The SMS message",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
+        {
+          "MethodName": "SMS history",
+          "Synopsis": "Retrieve the history of SMS",
+          "HTTPMethod": "GET",
+          "URI": "/sms/get_history",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "app_id",
+              "Description": "App ID",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "access_token",
+              "Description": "Access Token",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "from",
+              "Description": "From this date time (format: YYYY-MM-DD HH:MM:SS)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "to",
+              "Description": "Till this date time (format: YYYY-MM-DD HH:MM:SS)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "page",
+              "Description": "Page number",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
+        {
+          "MethodName": "Query SMS status",
+          "Synopsis": "Query an SMS status",
+          "HTTPMethod": "GET",
+          "URI": "/sms/query_status",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "app_id",
+              "Description": "App ID",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "access_token",
+              "Description": "Access Token",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "txn_ref",
+              "Description": "Transaction reference for the call",
+              "Type":"string",
+              "Required": "Y"
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "name": "IVR",
+      "methods": [
+        {
+          "MethodName": "Dial",
+          "Synopsis": "Call a number",
+          "HTTPMethod": "GET",
+          "URI": "/ivr/start/dial",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "app_id",
+              "Description": "App ID",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "access_token",
+              "Description": "Access Token",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "dest",
+              "Description": "Phone number to call to",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "msg",
+              "Description": "A message to play after the call is answered",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "caller_id",
+              "Description": "The caller ID that the destination number will see",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "max_duration",
+              "Description": "The max duration for the call (in sec)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
+        {
+          "MethodName": "Hangup",
+          "Synopsis": "Hangup a call",
+          "HTTPMethod": "GET",
+          "URI": "/ivr/end/hangup",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "app_id",
+              "Description": "App ID",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "access_token",
+              "Description": "Access Token",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "session",
+              "Description": "The session for the call",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "msg",
+              "Description": "A message to play before the call is hung up",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        }
+        
+      ]
+    }
+
+  ]
+}
