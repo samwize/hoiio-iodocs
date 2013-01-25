@@ -4,24 +4,12 @@
       "name": "Voice",
       "methods": [
         {
-          "MethodName": "Make call",
-          "Synopsis": "Make a voice call back",
+          "MethodName": "Make phone call",
+          "Synopsis": "Make a voice call back between 2 phones",
           "HTTPMethod": "GET",
           "URI": "/voice/call",
           "RequiresOAuth": "N",
           "parameters": [
-            {
-              "Name": "app_id",
-              "Description": "App ID",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
-              "Name": "access_token",
-              "Description": "Access Token",
-              "Type":"string",
-              "Required": "Y"
-            },
             {
               "Name": "dest1",
               "Description": "Phone number of destination 1 ",
@@ -62,27 +50,15 @@
         },
 
         {
-          "MethodName": "Call conference",
-          "Synopsis": "Make a conference call",
+          "MethodName": "Make conference call",
+          "Synopsis": "Make a conference call connecting multiple phones (up to 8).",
           "HTTPMethod": "GET",
           "URI": "/voice/conference",
           "RequiresOAuth": "N",
           "parameters": [
             {
-              "Name": "app_id",
-              "Description": "App ID",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
-              "Name": "access_token",
-              "Description": "Access Token",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
               "Name": "dest",
-              "Description": "List of phone numbers to call to, separated by commas",
+              "Description": "List of phone numbers to call to. Delimited by commas.",
               "Type":"string",
               "Required": "Y"
             },
@@ -114,6 +90,23 @@
         },
 
 
+        {
+          "MethodName": "Hangup",
+          "Synopsis": "Forcefully hangup a call that is in progress.",
+          "HTTPMethod": "GET",
+          "URI": "/voice/hangup",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "txn_ref",
+              "Description": "The transaction ID for that call",
+              "Type":"string",
+              "Required": "Y"
+            }
+          ]
+        },
+
+
 
         {
           "MethodName": "Call history",
@@ -122,18 +115,6 @@
           "URI": "/voice/get_history",
           "RequiresOAuth": "N",
           "parameters": [
-            {
-              "Name": "app_id",
-              "Description": "App ID",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
-              "Name": "access_token",
-              "Description": "Access Token",
-              "Type":"string",
-              "Required": "Y"
-            },
             {
               "Name": "from",
               "Description": "From this date time (format: YYYY-MM-DD HH:MM:SS)",
@@ -148,12 +129,72 @@
             },
             {
               "Name": "page",
-              "Description": "Page number",
+              "Description": "The page index (starts from 1)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "page_size",
+              "Description": "The number of entries to in each page",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "type",
+              "Type":"enumerated",
+              "EnumeratedList": [
+                  "call",
+                  "ivr",
+                  "all"
+                 ],
+              "Description": "Filter type of calls",
+              "Default":"all",
+              "Required": "N"
+            },
+            {
+              "Name": "src",
+              "Description": "Filter by the source of the transaction.",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "dest",
+              "Description": "Filter by the destination of the transaction.",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
               "Type":"string",
               "Required": "N"
             }
           ]
         },
+
+
+        {
+          "MethodName": "Call rate",
+          "Synopsis": "Retrieve the billable rate for a call",
+          "HTTPMethod": "GET",
+          "URI": "/voice/get_rate",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "dest1",
+              "Description": "Phone number of destination 1 ",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "dest2",
+              "Description": "Phone number of destination 2",
+              "Type":"string",
+              "Required": "Y"
+            }
+          ]
+        },
+
 
         {
           "MethodName": "Query call status",
@@ -162,18 +203,6 @@
           "URI": "/voice/query_status",
           "RequiresOAuth": "N",
           "parameters": [
-            {
-              "Name": "app_id",
-              "Description": "App ID",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
-              "Name": "access_token",
-              "Description": "Access Token",
-              "Type":"string",
-              "Required": "Y"
-            },
             {
               "Name": "txn_ref",
               "Description": "Transaction reference for the call",
@@ -186,6 +215,7 @@
       ]
     },
 
+
     {
       "name": "SMS",
       "methods": [
@@ -196,18 +226,6 @@
           "URI": "/sms/send",
           "RequiresOAuth": "N",
           "parameters": [
-            {
-              "Name": "app_id",
-              "Description": "App ID",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
-              "Name": "access_token",
-              "Description": "Access Token",
-              "Type":"string",
-              "Required": "Y"
-            },
             {
               "Name": "dest",
               "Description": "Phone number to send to",
@@ -249,18 +267,6 @@
           "RequiresOAuth": "N",
           "parameters": [
             {
-              "Name": "app_id",
-              "Description": "App ID",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
-              "Name": "access_token",
-              "Description": "Access Token",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
               "Name": "dest",
               "Description": "List of phone numbers to send to, separated by comma",
               "Type":"string",
@@ -301,18 +307,6 @@
           "RequiresOAuth": "N",
           "parameters": [
             {
-              "Name": "app_id",
-              "Description": "App ID",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
-              "Name": "access_token",
-              "Description": "Access Token",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
               "Name": "from",
               "Description": "From this date time (format: YYYY-MM-DD HH:MM:SS)",
               "Type":"string",
@@ -326,12 +320,78 @@
             },
             {
               "Name": "page",
-              "Description": "Page number",
+              "Description": "The page index (starts from 1)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "page_size",
+              "Description": "The number of entries to in each page",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "type",
+              "Default":"all",
+              "Type":"enumerated",
+              "EnumeratedList": [
+                  "incoming",
+                  "outgoing",
+                  "all"
+                 ],
+              "Description": "Filter type of SMS",
+              "Required": "N"
+            },
+            {
+              "Name": "src",
+              "Description": "Filter by the source of the transaction.",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "dest",
+              "Description": "Filter by the destination of the transaction.",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
               "Type":"string",
               "Required": "N"
             }
           ]
         },
+
+
+        {
+          "MethodName": "SMS rate",
+          "Synopsis": "Retrieve the billable rate for each SMS sent/received",
+          "HTTPMethod": "GET",
+          "URI": "/sms/get_rate",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "dest",
+              "Description": "Phone number to send to",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "incoming",
+              "Description": "Hoiio number that receives the incoming SMS",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "msg",
+              "Description": "The SMS message",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
 
         {
           "MethodName": "Query SMS status",
@@ -340,18 +400,6 @@
           "URI": "/sms/query_status",
           "RequiresOAuth": "N",
           "parameters": [
-            {
-              "Name": "app_id",
-              "Description": "App ID",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
-              "Name": "access_token",
-              "Description": "Access Token",
-              "Type":"string",
-              "Required": "Y"
-            },
             {
               "Name": "txn_ref",
               "Description": "Transaction reference for the call",
@@ -374,18 +422,6 @@
           "URI": "/ivr/start/dial",
           "RequiresOAuth": "N",
           "parameters": [
-            {
-              "Name": "app_id",
-              "Description": "App ID",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
-              "Name": "access_token",
-              "Description": "Access Token",
-              "Type":"string",
-              "Required": "Y"
-            },
             {
               "Name": "dest",
               "Description": "Phone number to call to",
@@ -425,6 +461,233 @@
           ]
         },
 
+
+        {
+          "MethodName": "Play",
+          "Synopsis": "Play a voice message (text or MP3) over the phone call",
+          "HTTPMethod": "GET",
+          "URI": "/ivr/middle/play",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "session",
+              "Description": "The session ID for this phone call",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "msg",
+              "Description": "The message to play (text or <url>http://some.mp3.com</url>)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+        
+
+        {
+          "MethodName": "Gather",
+          "Synopsis": "Gather user input via the telephone's keypad in IVR calls",
+          "HTTPMethod": "GET",
+          "URI": "/ivr/middle/gather",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "session",
+              "Description": "The session ID for this phone call",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "msg",
+              "Description": "The message to play (text or <url>http://some.mp3.com</url>)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "max_digits",
+              "Description": "The maximum number of digits to gather",
+              "Type":"integer",
+              "Required": "N"
+            },
+            {
+              "Name": "timeout",
+              "Description": "The time (in seconds) that the user has to respond before timeout",
+              "Type":"integer",
+              "Required": "N"
+            },
+            {
+              "Name": "attempts",
+              "Description": "TThe number of attempts if the user does not respond",
+              "Type":"integer",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
+
+        {
+          "MethodName": "Record",
+          "Synopsis": "Record voice message from the user over the phone",
+          "HTTPMethod": "GET",
+          "URI": "/ivr/middle/record",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "session",
+              "Description": "The session ID for this phone call",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "msg",
+              "Description": "The message to play (text or <url>http://some.mp3.com</url>)",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "max_duration",
+              "Description": "The maximum duration (in seconds) for the recording",
+              "Type":"integer",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+        
+
+        {
+          "MethodName": "Monitor",
+          "Synopsis": "Record the whole phone conversation",
+          "HTTPMethod": "GET",
+          "URI": "/ivr/middle/monitor",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "session",
+              "Description": "The session ID for this phone call",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "msg",
+              "Description": "The message to play (text or <url>http://some.mp3.com</url>) before recording",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+        
+
+        {
+          "MethodName": "Transfer",
+          "Synopsis": "Transfer the call to another phone",
+          "HTTPMethod": "GET",
+          "URI": "/ivr/end/transfer",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "session",
+              "Description": "The session ID for this phone call",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "dest",
+              "Description": "Phone number to transfer to",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "msg",
+              "Description": "A message to play before the call is transferred",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "caller_id",
+              "Description": "The caller ID that the destination number will see",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "on_failure",
+              "Description": "Action to perform if the transfer fails",
+              "Type":"enumerated",
+              "EnumeratedList": [
+                  "hangup",
+                  "continue"
+                 ],
+              "EnumeratedDescription": {
+                  "hangup": "the ivr session will be hung up",
+                  "continue": "the ivr session will continue and you may issue a Middle/End block"
+                 },
+              "Default":"hangup",
+              "Required": "N"
+            },
+            {
+              "Name": "tag",
+              "Description": "Tag for this transaction",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "notify_url",
+              "Description": "A callback URL to your server for this request",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
+
         {
           "MethodName": "Hangup",
           "Synopsis": "Hangup a call",
@@ -432,18 +695,6 @@
           "URI": "/ivr/end/hangup",
           "RequiresOAuth": "N",
           "parameters": [
-            {
-              "Name": "app_id",
-              "Description": "App ID",
-              "Type":"string",
-              "Required": "Y"
-            },
-            {
-              "Name": "access_token",
-              "Description": "Access Token",
-              "Type":"string",
-              "Required": "Y"
-            },
             {
               "Name": "session",
               "Description": "The session for the call",
@@ -472,7 +723,185 @@
         }
         
       ]
+    },
+
+
+    {
+      "name": "Number",
+      "methods": [
+        {
+          "MethodName": "Supported numbers",
+          "Synopsis": "Get details on local phone numbers - countries, states and capabilities",
+          "HTTPMethod": "GET",
+          "URI": "/number/get_countries",
+          "RequiresOAuth": "N",
+          "parameters": [
+          ]
+        },
+
+        {
+          "MethodName": "Available numbers",
+          "Synopsis": "Get the list of phone numbers",
+          "HTTPMethod": "GET",
+          "URI": "/number/get_choices",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "country",
+              "Description": "Numbers from the country. Use the 2 letter country code.",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "state",
+              "Description": "Numbers from the state. Use the 2 letter state code. Required if the country has states eg. US",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "page",
+              "Description": "The page index (starts from 1)",
+              "Type":"string",
+              "Required": "N"
+            }
+          ]
+        },
+
+
+        {
+          "MethodName": "Number rates",
+          "Synopsis": "Retrieve the monthly subscription rate for a phone number",
+          "HTTPMethod": "GET",
+          "URI": "/number/get_rates",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "country",
+              "Description": "Numbers from the country. Use the 2 letter country code.",
+              "Type":"string",
+              "Required": "Y"
+            }
+          ]
+        },
+
+
+        {
+          "MethodName": "Subscribe number",
+          "Synopsis": "Subscribe (pay) for a phone number. Can be used to extend existing numbers.",
+          "HTTPMethod": "GET",
+          "URI": "/number/subscribe",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "number",
+              "Description": "The phone number to subscribe",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "duration",
+              "Description": "The number of months to subscribe",
+              "Required": "Y",
+              "Type":"enumerated",
+              "EnumeratedList": [
+                  "1",
+                  "3",
+                  "12",
+                  "auto_extend"
+                 ],
+              "EnumeratedDescription": {
+                  "1": "1 month",
+                  "3": "3 months",
+                  "12": "12 months",
+                  "auto_extend": "Auto subscribe month by month"
+                 }
+            }
+          ]
+        },
+
+
+        {
+          "MethodName": "Update number",
+          "Synopsis": "Update the notification URLs and mode of use (fax or voice)",
+          "HTTPMethod": "GET",
+          "URI": "/number/update_forwarding",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "number",
+              "Description": "The phone number to update",
+              "Type":"string",
+              "Required": "Y"
+            },
+            {
+              "Name": "forward_to",
+              "Description": "Your server URL when the number receives an incoming voice call/fax",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "forward_sms_to",
+              "Description": "Your server URL when the number receives an incoming SMS",
+              "Type":"string",
+              "Required": "N"
+            },
+            {
+              "Name": "mode",
+              "Description": "A phone number can support either voice call or fax",
+              "Type":"enumerated",
+              "EnumeratedList": [
+                  "voice",
+                  "fax"
+                 ],
+              "EnumeratedDescription": {
+                  "voice": "Voice call mode",
+                  "fax": "Fax mode"
+                 },
+               "Required": "N",
+               "Default": "voice"
+            }
+          ]
+        },
+
+        {
+          "MethodName": "Subscribed numbers",
+          "Synopsis": "Get details on all your subscribed numbers",
+          "HTTPMethod": "GET",
+          "URI": "/number/get_active",
+          "RequiresOAuth": "N",
+          "parameters": [
+          ]
+        }
+
+      ]
+    },
+
+
+    {
+      "name": "Account",
+      "methods": [
+        {
+          "MethodName": "Credit balance",
+          "Synopsis": "Get account credit balance",
+          "HTTPMethod": "GET",
+          "URI": "/user/get_balance",
+          "RequiresOAuth": "N",
+          "parameters": [
+          ]
+        },
+
+        {
+          "MethodName": "Account info",
+          "Synopsis": "Get account general info",
+          "HTTPMethod": "GET",
+          "URI": "/user/get_info",
+          "RequiresOAuth": "N",
+          "parameters": [
+          ]
+        }
+      ]
     }
+
 
   ]
 }

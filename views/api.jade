@@ -28,9 +28,23 @@ form#credentials
                  - var defaultSecret =apiInfo.auth.defaultSecret
              - else
                  - var defaultSecret =''
-             div
-                 label(for='key') API Key
-                 input(id='key', name='key', value=defaultKey, style='color=#EEEEEE')
+
+             - if (apiInfo.auth == '2key')
+                 div
+                     div#instr
+                       p 
+                          a(href="http://developer.hoiio.com") Register
+                          |  a Hoiio developer account to get your API credentials.
+                       <br />
+                     label(for='keyParam1')=apiInfo.keyParam1
+                     input(id='keyParam1', name='keyParam1', value=defaultKey, style='color=#EEEEEE')
+                     label(for='keyParam2')=apiInfo.keyParam2
+                     input(id='keyParam2', name='keyParam2', value=defaultKey, style='color=#EEEEEE')
+             - else
+                 div
+                     label(for='key') API Key
+                     input(id='key', name='key', value=defaultKey, style='color=#EEEEEE')
+
              div
                  - if (apiInfo.oauth || apiInfo.signature)
                      label(for='secret') Shared Secret
@@ -38,6 +52,9 @@ form#credentials
              - if (apiInfo.oauth && apiInfo.oauth.type !='two-legged')
                  div
                     input(name='oauth', value='Authenticate with OAuth', type='submit', id='oauth-auth')
+
+
+
 
 div(id='controls')
     ul

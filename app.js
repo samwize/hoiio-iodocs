@@ -287,6 +287,15 @@ function processRequest(req, res, next) {
         apiConfig = apisConfig[apiName],
         key = req.sessionID + ':' + apiName;
 
+    // For auth.key2, add the 2 keys to param
+    if (apiConfig.auth == '2key') {
+        console.log('req: ' + query.stringify(reqQuery));
+        console.log('Params: ' + query.stringify(reqQuery.params));
+        params[apiConfig.keyParam1] = reqQuery['keyParam1'];
+        params[apiConfig.keyParam2] = reqQuery['keyParam2'];
+        console.log('Auth==2key ; Params: ' + query.stringify(params));
+    }
+
     // Extract custom headers from the params
     for( var param in params ) 
     {

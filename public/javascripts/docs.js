@@ -173,9 +173,11 @@
         var params = $(this).serializeArray(),
             apiKey = { name: 'apiKey', value: $('input[name=key]').val() },
             apiSecret = { name: 'apiSecret', value: $('input[name=secret]').val() },
+            keyParam1 = { name: 'keyParam1', value: $('input[name=keyParam1]').val() },
+            keyParam2 = { name: 'keyParam2', value: $('input[name=keyParam2]').val() },
             apiName = { name: 'apiName', value: $('input[name=apiName]').val() };
 
-        params.push(apiKey, apiSecret, apiName);
+        params.push(apiKey, apiSecret, keyParam1, keyParam2, apiName);
 
         // Setup results container
         var resultContainer = $('.result', self);
@@ -269,6 +271,9 @@
                 $('pre.headers', resultContainer)
                     .text(formatJSON(response.headers));
             }
+
+            // Set all the sessions automatically
+            $('input.params[session]').val('s1234');
 
             // Syntax highlighting
             prettyPrint();

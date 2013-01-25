@@ -1,10 +1,12 @@
 {
     "hoiio": {
-    "name": "Hoiio API",
-    "protocol": "http",
-    "baseURL": "secure.hoiio.com",
-    "publicPath": "/open",
-    "auth": ""
+        "name": "Hoiio API",
+        "protocol": "http",
+        "baseURL": "secure.hoiio.com",
+        "publicPath": "/open",
+        "auth": "2key",
+        "keyParam1": "app_id",
+        "keyParam2": "access_token"
     },
 
     "klout": {
